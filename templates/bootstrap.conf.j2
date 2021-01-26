@@ -38,8 +38,8 @@ graceful.shutdown.seconds=20
 java.arg.1=-Dorg.apache.jasper.compiler.disablejsr199=true
 
 # JVM memory settings
-java.arg.2={{ NIFI_REGISTRY_MIN_RAM | default('-Xms512m') }}
-java.arg.3={{ NIFI_REGISTRY_MAX_RAM | default('-Xms512m') }}
+java.arg.2=-Xms{{ NIFI_REGISTRY_MIN_RAM | default('512m') }}
+java.arg.3=-Xmx{{ NIFI_REGISTRY_MAX_RAM | default('512m') }}
 
 # Enable Remote Debugging
 #java.arg.debug=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000

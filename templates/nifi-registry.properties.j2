@@ -15,10 +15,13 @@
 
 # web properties #
 nifi.registry.web.war.directory=./lib
-nifi.registry.web.http.host={% if NIFI_REGISTRY_WEB_HTTPS_PORT is not defined %}{{ NIFI_REGISTRY_WEB_HTTP_HOST | default(HOSTNAME) }}{% endif %}
-nifi.registry.web.http.port={% if NIFI_REGISTRY_WEB_HTTPS_PORT is not defined %}{{ NIFI_REGISTRY_WEB_HTTP_PORT | default('18080') }}{% endif %}
-nifi.registry.web.https.host={% if NIFI_REGISTRY_WEB_HTTPS_PORT is defined %}{{ NIFI_REGISTRY_WEB_HTTPS_HOST | default(HOSTNAME) }}{% endif %}
-nifi.registry.web.https.port={{ NIFI_REGISTRY_WEB_HTTPS_PORT | default() }}
+{% if NIFI_REGISTRY_WEB_HTTPS_ENABLE is not defined and NIFI_REGISTRY_WEB_HTTPS_ENABLE != 'true' %}
+nifi.registry.web.http.host={{ NIFI_REGISTRY_WEB_HTTP_HOST | default(HOSTNAME) }}
+nifi.registry.web.http.port={{ NIFI_REGISTRY_WEB_HTTP_PORT | default('18080') }}
+{% else %}
+nifi.registry.web.https.host={{ NIFI_REGISTRY_WEB_HTTPS_HOST | default(HOSTNAME) }}
+nifi.registry.web.https.port={{ NIFI_REGISTRY_WEB_HTTPS_PORT | default('18443') }}
+{% endif %}
 nifi.registry.web.jetty.working.directory=./work/jetty
 nifi.registry.web.jetty.threads=200
 nifi.registry.web.should.send.server.version=true
@@ -77,8 +80,8 @@ nifi.registry.extension.dir.aws=./ext/aws/lib
 # (certificates, LDAP, Kerberos) can be treated the same internally in NiFi. The following example demonstrates normalizing
 # DNs from certificates and principals from Kerberos into a common identity string:
 #
-# nifi.registry.security.identity.mapping.pattern.dn=^CN=(.*?), OU=(.*?), O=(.*?), L=(.*?), ST=(.*?), C=(.*?)$
-# nifi.registry.security.identity.mapping.value.dn=$1@$2
+nifi.registry.security.identity.mapping.pattern.dn={{ NIFI_REGISTRY_SECURITY_IDENTITY_MAPPING_PATTERN_DN | default('') }}
+nifi.registry.security.identity.mapping.value.dn={{ NIFI_REGISTRY_SECURITY_IDENTITY_MAPPING_VALUE_DN | default('') }}
 # nifi.registry.security.identity.mapping.transform.dn=NONE
 
 # nifi.registry.security.identity.mapping.pattern.kerb=^(.*?)/instance@(.*?)$

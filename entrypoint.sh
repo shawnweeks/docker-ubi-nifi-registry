@@ -9,7 +9,7 @@ umask 0027
 # Get Hostname from EC2 Meta if running on AWS ECS EC2
 if [[ "${AWS_EXECUTION_ENV:=FALSE}" == "AWS_ECS_EC2" ]]
 then
-    export HOSTNAME="$(curl -s 169.254.169.254/latest/meta-data/local-hostname)"
+    export AWS_EC2_HOSTNAME="$(curl -s 169.254.169.254/latest/meta-data/local-hostname)"
 fi
 
 export JAVA_OPTS="${JAVA_OPTS}"
