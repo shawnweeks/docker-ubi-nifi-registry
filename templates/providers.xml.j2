@@ -21,11 +21,13 @@
             3) Bundle Persistence Provider (Must occur once and only once)
      -->
 
+    <!--
     <flowPersistenceProvider>
         <class>org.apache.nifi.registry.provider.flow.FileSystemFlowPersistenceProvider</class>
         <property name="Flow Storage Directory">./flow_storage</property>
     </flowPersistenceProvider>
-
+    -->
+    
     <!--
     <flowPersistenceProvider>
         <class>org.apache.nifi.registry.provider.flow.git.GitFlowPersistenceProvider</class>
@@ -37,11 +39,9 @@
     </flowPersistenceProvider>
     -->
 
-    <!--
     <flowPersistenceProvider>
         <class>org.apache.nifi.registry.provider.flow.DatabaseFlowPersistenceProvider</class>
     </flowPersistenceProvider>
-    -->
 
     <!--
     <eventHookProvider>
