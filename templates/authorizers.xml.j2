@@ -279,8 +279,7 @@
         <property name="Authorizations File">./conf/authorizations.xml</property>
         <property name="Initial Admin Identity">{{ NIFI_REGISTRY_INITIAL_ADMIN | default('') }}</property>
         <property name="NiFi Group Name"></property>
-
-        <!--<property name="NiFi Identity 1"></property>-->
+        <property name="NiFi Identity 1"></property>
     </accessPolicyProvider>
     -->
     
@@ -316,7 +315,7 @@
     <authorizer>
         <identifier>managed-authorizer</identifier>
         <class>org.apache.nifi.registry.security.authorization.StandardManagedAuthorizer</class>
-        <property name="Access Policy Provider">file-access-policy-provider</property>
+        <property name="Access Policy Provider">database-access-policy-provider</property>
     </authorizer>
 
 </authorizers>

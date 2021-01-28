@@ -14,9 +14,22 @@ fi
 
 export JAVA_OPTS="${JAVA_OPTS}"
 
+shutdown() {
+    echo "NiFi-Registry Shutting Down"
+    kill -SIGTERM ${NIFI_REGISTRY_PID}
+    echo "NiFi-Registry Shut Down"
+}
+
+
 entrypoint.py
 
 # Clears variables starting with NIFI_ to avoid any secret leakage.
 unset "${!NIFI_REGISTRY_@}"
 
-bin/nifi-registry.sh run
+trap "shutdown" TERM
+
+bin/nifi-registry.sh run &
+NIFI_REGISTRY_PID="$!"
+
+echo "NiFi-Registry running with PID ${NIFI_REGISTRY_PID}"
+wait ${NIFI_REGISTRY_PID}
