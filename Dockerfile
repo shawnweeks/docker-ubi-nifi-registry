@@ -19,9 +19,9 @@ RUN mkdir -p /tmp/nifi_registry_package && \
     mkdir -p /tmp/nifi_registry_package/run
 
 ###############################################################################
-ARG BASE_REGISTRY
-ARG BASE_IMAGE=redhat/ubi/ubi8
-ARG BASE_TAG=8.3
+# ARG BASE_REGISTRY
+# ARG BASE_IMAGE=redhat/ubi/ubi8
+# ARG BASE_TAG=8.3
 
 FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}
 
@@ -32,7 +32,7 @@ ENV NIFI_REGISTRY_GID 2002
 
 ENV NIFI_REGISTRY_HOME /opt/nifi-registry
 
-RUN yum install -y java-11-openjdk-devel python2 python2-jinja2 && \
+RUN yum install -y java-11-openjdk-devel python3 python3-jinja2 && \
     yum clean all && \
     mkdir -p ${NIFI_REGISTRY_HOME} && \    
     groupadd -r -g ${NIFI_REGISTRY_GID} ${NIFI_REGISTRY_GROUP} && \
