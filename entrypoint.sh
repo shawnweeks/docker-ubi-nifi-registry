@@ -20,7 +20,7 @@ entrypoint.py
 unset "${!NIFI_REGISTRY_@}"
 
 set +e
-flock -x -w 30 ${HOME}/.flock ${HOME}/bin/nifi-registry.sh run -fg &
+flock -x -w 30 ${HOME}/.flock ${HOME}/bin/nifi-registry.sh run &
 NIFI_REGISTRY_PID="$!"
 
 echo "NiFi-Registry Started with PID ${NIFI_REGISTRY_PID}"
